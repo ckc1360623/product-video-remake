@@ -1,4 +1,4 @@
 interface:
   display_name: "商品视频复刻编译器"
-  short_description: "离线拆解、镜头合同、单次或高保真分段请求及成片验收"
-  default_prompt: "使用 $product-video-remake 在本地完整拆解参考视频，生成不含内部T编号的镜头时间线，按镜头密度选择标准或高保真模式，并在提供成片时执行后验收。"
+  short_description: "快速拆解爆款商品视频并生成可执行的视频脚本提示词"
+  default_prompt: "使用 $product-video-remake 在本地完整拆解我有权使用的爆款商品参考视频，提取分镜、节奏、动作和状态变化，生成不含内部T编号的可执行视频脚本提示词，按镜头密度选择标准或高保真模式，并在提供成片时执行后验收。"
