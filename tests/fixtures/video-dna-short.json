@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.2",
+  "source_asset": {
+    "asset_id": "reference_video",
+    "source": "fixtures/reference.mp4"
+  },
+  "media": {
+    "duration_ms": 8000,
+    "width": 1080,
+    "height": 1920,
+    "ratio": "9:16",
+    "fps": 30,
+    "has_audio": true
+  },
+  "summary": {
+    "style": "UGC自拍快节奏前后对比",
+    "narrative": "困扰 → 商品 → 使用 → 变化",
+    "type_vector": {
+      "human_identity_dependence": "high",
+      "transformation_dependence": "high",
+      "audio_beat_dependence": "high"
+    }
+  },
+  "audio": {
+    "has_audio": true,
+    "beat_anchors_ms": [0, 1200, 2800, 5200, 7000]
+  },
+  "shots": [
+    {
+      "id": "S001",
+      "source_start_ms": 0,
+      "source_end_ms": 1800,
+      "description": "女主在镜前展示变化前较丰满的体态，表情困扰",
+      "narrative_role": "hook_problem",
+      "importance": 1.0,
+      "must_keep": true,
+      "signature": true,
+      "camera": "手持中景，轻微前推",
+      "composition": "人物居中，腰部以上",
+      "states": "丰满体型、圆润脸型、闭合姿态、困扰表情",
+      "scene": "偏暗卧室镜前",
+      "audio": "第一拍抬头，1.2秒重拍切镜",
+      "transition_out": "硬切"
+    },
+    {
+      "id": "S002",
+      "source_start_ms": 1800,
+      "source_end_ms": 4600,
+      "description": "商品进入画面，女主拆开并冲泡后饮用",
+      "narrative_role": "product_demo",
+      "importance": 0.95,
+      "must_keep": true,
+      "camera": "商品特写快速推近后切回中近景",
+      "composition": "商品居中占画面三分之一",
+      "product": "原商品出现、拆开、冲泡、饮用",
+      "audio": "包装声与鼓点同步，口播介绍商品",
+      "text_overlays": ["坚持使用"],
+      "transition_out": "闪白硬切"
+    },
+    {
+      "id": "S003",
+      "source_start_ms": 4600,
+      "source_end_ms": 8000,
+      "description": "同一女主展示明显更苗条的变化后体态，精神自信",
+      "narrative_role": "transformation_payoff",
+      "importance": 1.0,
+      "must_keep": true,
+      "signature": true,
+      "camera": "中景向后小幅拉远",
+      "composition": "人物居中展示全身轮廓",
+      "states": "苗条体型、脸型收窄、开放姿态、自信表情",
+      "scene": "同一卧室变得明亮整洁",
+      "audio": "5.2秒音乐高潮完成变化",
+      "text_overlays": ["前后对比"],
+      "transition_out": "定格结束"
+    }
+  ],
+  "source_elements": [
+    {
+      "id": "E001",
+      "type": "person_state_change",
+      "description": "同一女主从明显丰满变得明显苗条，脸型、体态和自信程度同步变化",
+      "must_keep": true,
+      "source_shot_ids": ["S001", "S003"]
+    },
+    {
+      "id": "E002",
+      "type": "product_interaction",
+      "description": "商品在第二镜头完成出现、拆开、冲泡和饮用",
+      "must_keep": true,
+      "source_shot_ids": ["S002"]
+    },
+    {
+      "id": "E003",
+      "type": "audio_sync",
+      "description": "1.2秒切镜和5.2秒变化完成均对齐音乐重拍",
+      "must_keep": true,
+      "source_shot_ids": ["S001", "S003"]
+    }
+  ]
+}

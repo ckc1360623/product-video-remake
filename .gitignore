@@ -1,0 +1,48 @@
+# Runtime analysis and generated packages may contain local paths or source media.
+.product-video-remake-cache/
+analysis-pack/
+output/
+outputs/
+generated/
+high-fidelity-package/
+
+# User-provided and derived media.
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.wav
+*.m4a
+*.mp3
+contact-sheet*.jpg
+contact-sheet*.jpeg
+contact-sheet*.png
+
+# Pipeline outputs when a command is run from the repository root.
+/product-profile.json
+/source-video-dna.json
+/remake-plan.json
+/seedance-prompt.txt
+/upload-manifest.json
+/seedance-request.json
+/preflight-validation-report*.json
+/postflight-validation-report*.json
+/fidelity-package.json
+/assembly-plan.json
+
+# Local configuration and Python artifacts.
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editor and operating-system metadata.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.2",
+  "source_asset": {
+    "asset_id": "reference_video",
+    "source": "https://assets.example.com/reference-long.mp4"
+  },
+  "media": {
+    "duration_ms": 60000,
+    "width": 1080,
+    "height": 1920,
+    "ratio": "9:16",
+    "fps": 30,
+    "has_audio": true
+  },
+  "summary": {
+    "style": "快速问题解决型商品视频",
+    "narrative": "问题 → 多次尝试 → 商品 → 使用 → 变化 → 结果"
+  },
+  "audio": {
+    "has_audio": true,
+    "beat_anchors_ms": [0, 6000, 12000, 22000, 36000, 48000, 58000]
+  },
+  "shots": [
+    {"id": "S001", "source_start_ms": 0, "source_end_ms": 5000, "description": "强烈问题开场", "narrative_role": "hook", "importance": 1.0, "must_keep": true, "signature": true, "camera": "快速推近", "states": "变化前状态", "audio": "第一重拍"},
+    {"id": "S002", "source_start_ms": 5000, "source_end_ms": 12000, "description": "重复展示第一组困扰", "narrative_role": "problem", "importance": 0.3, "must_keep": false},
+    {"id": "S003", "source_start_ms": 12000, "source_end_ms": 19000, "description": "重复展示第二组困扰", "narrative_role": "problem", "importance": 0.25, "must_keep": false},
+    {"id": "S004", "source_start_ms": 19000, "source_end_ms": 27000, "description": "商品首次出现并被拿起", "narrative_role": "product_reveal", "importance": 1.0, "must_keep": true, "product": "商品首次出现", "audio": "揭晓音效"},
+    {"id": "S005", "source_start_ms": 27000, "source_end_ms": 37000, "description": "完整使用演示", "narrative_role": "product_demo", "importance": 0.95, "must_keep": true, "product": "打开、使用", "audio": "动作卡点"},
+    {"id": "S006", "source_start_ms": 37000, "source_end_ms": 45000, "description": "重复解释使用过程", "narrative_role": "exposition", "importance": 0.2, "must_keep": false},
+    {"id": "S007", "source_start_ms": 45000, "source_end_ms": 54000, "description": "人物和场景发生明显变化", "narrative_role": "transformation", "importance": 1.0, "must_keep": true, "signature": true, "states": "变化后状态", "scene": "场景同步变亮", "audio": "高潮重拍"},
+    {"id": "S008", "source_start_ms": 54000, "source_end_ms": 60000, "description": "结果和商品收尾", "narrative_role": "payoff_cta", "importance": 1.0, "must_keep": true, "product": "商品正面特写", "audio": "收尾口播"}
+  ],
+  "source_elements": [
+    {"id": "E001", "type": "hook", "description": "保留强问题开场", "must_keep": true, "source_shot_ids": ["S001"]},
+    {"id": "E002", "type": "product_reveal", "description": "保留商品首次出现", "must_keep": true, "source_shot_ids": ["S004"]},
+    {"id": "E003", "type": "product_demo", "description": "保留核心使用动作", "must_keep": true, "source_shot_ids": ["S005"]},
+    {"id": "E004", "type": "state_change", "description": "保留人物和场景变化", "must_keep": true, "source_shot_ids": ["S007"]},
+    {"id": "E005", "type": "payoff", "description": "保留结果和收尾", "must_keep": true, "source_shot_ids": ["S008"]},
+    {"id": "E006", "type": "repetition", "description": "第二组重复困扰", "must_keep": false, "source_shot_ids": ["S003"]}
+  ]
+}

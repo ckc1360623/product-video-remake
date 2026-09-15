@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/product-video-remake/remake-plan.schema.json",
+  "title": "Remake Plan with Editing Contract",
+  "type": "object",
+  "required": ["schema_version", "contract", "target", "product_distance", "editing_contract", "generation_strategy", "timeline", "coverage", "compression"],
+  "properties": {
+    "schema_version": {"const": "1.3"},
+    "contract": {
+      "type": "object",
+      "required": ["generation_call_count", "segmented_generation", "post_editing", "video_assembly"],
+      "properties": {
+        "generation_call_count": {"const": 1},
+        "segmented_generation": {"const": false},
+        "post_editing": {"const": false},
+        "video_assembly": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "required": ["duration_s", "ratio", "resolution", "generate_audio"],
+      "properties": {
+        "model": {"type": "string"},
+        "duration_s": {"type": "integer", "minimum": 4, "maximum": 15},
+        "ratio": {"enum": ["16:9", "4:3", "1:1", "3:4", "9:16", "21:9", "adaptive"]},
+        "resolution": {"enum": ["480p", "720p", "1080p"]},
+        "generate_audio": {"type": "boolean"},
+        "seed": {"type": "integer", "minimum": -1, "maximum": 4294967295},
+        "watermark": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "product_distance": {
+      "type": "object",
+      "required": ["level", "reasons"],
+      "properties": {
+        "level": {"enum": ["same", "adjacent", "functionally_related", "distant"]},
+        "reasons": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "global_locked_details": {"type": "array", "items": {"type": "string"}},
+    "allowed_changes": {"type": "array", "items": {"type": "string"}},
+    "prompt_exclusion_terms": {
+      "type": "array",
+      "description": "Source-only brand names, file names, labels, or identifiers that must not appear in the final prompt or API request.",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "editing_contract": {
+      "type": "object",
+      "required": ["expected_shot_count", "expected_cut_count", "expected_cut_times_ms", "max_cut_drift_ms", "merge_forbidden"],
+      "properties": {
+        "expected_shot_count": {"type": "integer", "minimum": 1},
+        "expected_cut_count": {"type": "integer", "minimum": 0},
+        "expected_cut_times_ms": {"type": "array", "items": {"type": "integer", "minimum": 1}},
+        "max_cut_drift_ms": {"type": "integer", "minimum": 0},
+        "merge_forbidden": {
+          "type": "array",
+          "items": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "string"}}
+        }
+      },
+      "additionalProperties": false
+    },
+    "generation_strategy": {
+      "type": "object",
+      "required": ["recommended_mode", "shot_count", "average_shot_ms", "reasons"],
+      "properties": {
+        "recommended_mode": {"enum": ["standard_single_call", "high_fidelity_segmented"]},
+        "shot_count": {"type": "integer", "minimum": 1},
+        "average_shot_ms": {"type": "integer", "minimum": 1},
+        "reasons": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "adaptation_ledger": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_detail", "decision", "target_instruction", "preserved_features", "reason"],
+        "properties": {
+          "source_detail": {"type": "string"},
+          "decision": {"enum": ["preserved", "approximated", "minimally_adapted", "omitted_with_reason"]},
+          "target_instruction": {"type": "string"},
+          "preserved_features": {"type": "array", "items": {"type": "string"}},
+          "reason": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "timeline": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "target_start_ms", "target_end_ms", "source_shot_ids", "description"],
+        "properties": {
+          "id": {"type": "string"},
+          "target_start_ms": {"type": "integer", "minimum": 0},
+          "target_end_ms": {"type": "integer", "minimum": 1},
+          "source_shot_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "description": {"type": "string", "minLength": 1},
+          "shot_number": {"type": "integer", "minimum": 1},
+          "must_be_distinct": {"type": "boolean"},
+          "must_cut_before": {"type": "boolean"},
+          "must_cut_after": {"type": "boolean"},
+          "visual_delta": {"type": "string"},
+          "required_action": {"type": ["array", "object", "string"]},
+          "required_outfit": {"type": ["array", "object", "string"]},
+          "required_scene": {"type": ["array", "object", "string"]},
+          "camera": {"type": ["object", "string"]},
+          "composition": {"type": ["object", "string"]},
+          "subject_and_state": {"type": ["object", "array", "string"]},
+          "product_action": {"type": ["object", "string"]},
+          "scene": {"type": ["object", "string"]},
+          "audio": {"type": ["object", "string"]},
+          "target_beat_anchors_ms": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+          "text_and_effects": {"type": ["object", "array", "string"]},
+          "transition": {"type": ["object", "string"]},
+          "locked_details": {"type": "array", "items": {"type": "string"}},
+          "allowed_changes": {"type": "array", "items": {"type": "string"}}
+        },
+        "additionalProperties": true
+      }
+    },
+    "coverage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_element_id", "status", "target_timeline_ids"],
+        "properties": {
+          "source_element_id": {"type": "string"},
+          "status": {"enum": ["preserved", "approximated", "minimally_adapted", "omitted_with_reason"]},
+          "target_timeline_ids": {"type": "array", "items": {"type": "string"}},
+          "instruction": {"type": "string"},
+          "reason": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "compression": {"type": "object"}
+  },
+  "additionalProperties": true
+}

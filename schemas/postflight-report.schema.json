@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/product-video-remake/postflight-report.schema.json",
+  "title": "Generated Video Structural Validation Report",
+  "type": "object",
+  "required": ["schema_version", "structural_ready", "fidelity_ready", "semantic_review_required", "errors", "warnings", "measured", "expected", "semantic_review_checklist"],
+  "properties": {
+    "schema_version": {"const": "1.3"},
+    "structural_ready": {"type": "boolean"},
+    "fidelity_ready": {"type": ["boolean", "null"]},
+    "semantic_review_required": {"const": true},
+    "errors": {"type": "array", "items": {"type": "string"}},
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "measured": {"type": "object"},
+    "expected": {"type": "object"},
+    "cut_matches": {"type": "array"},
+    "missing_cut_times_ms": {"type": "array", "items": {"type": "integer"}},
+    "semantic_review_checklist": {"type": "array", "items": {"type": "object"}},
+    "contact_sheet": {"type": "string"}
+  },
+  "additionalProperties": true
+}

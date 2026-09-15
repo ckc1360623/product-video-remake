@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.2",
+  "source_images": [
+    {
+      "asset_id": "product_image_1",
+      "source": "fixtures/product.png",
+      "description": "目标商品正面包装图"
+    }
+  ],
+  "identity": {
+    "name": {"value": "晨光咖啡", "source": "observed", "confidence": 0.96},
+    "brand": {"value": "虚构品牌", "source": "observed", "confidence": 0.9},
+    "category": {"value": "即饮咖啡", "source": "inferred", "confidence": 0.86}
+  },
+  "visual_identity": {
+    "shape": "带吸嘴的独立软袋",
+    "colors": ["白色", "墨绿色"],
+    "logo_position": "盒体正面上方",
+    "label_layout": "中央竖排商品名"
+  },
+  "usage": {
+    "actions": ["拿起包装", "插入吸管", "饮用"]
+  },
+  "selling_points": [
+    {"value": "独立便携包装", "source": "observed", "confidence": 0.9}
+  ],
+  "unknowns": ["精确配方和风味"]
+}
