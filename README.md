@@ -1,8 +1,30 @@
-# Product Video Remake
+# Product Video Remake - Codex Skill
+
+> 这是一个可安装到 OpenAI Codex 的 Skill，不是独立的视频生成应用。
 
 `product-video-remake` 是一个用于快速复刻爆款或高表现商品视频脚本的离线编译 Skill。它分析用户有权使用的参考视频，提取分镜顺序、节奏、动作、运镜、声音节点以及人物、商品和场景变化，再结合目标商品图片，生成可直接用于视频模型的复刻脚本提示词、请求包和验收清单。
 
 它适合电商运营、短视频创作者和 AIGC 视频团队快速研究成熟视频结构，并把原本依赖人工逐帧观察的工作整理成可验证的镜头时间线。该项目不会上传素材、调用视频生成 API、轮询任务或下载生成结果；参考视频只用于本地分析，模型请求只应包含独立成片提示词和目标商品图片。
+
+## 安装到 Codex
+
+最简单的安装方式是在 Codex 中发送：
+
+```text
+请从 https://github.com/ckc1360623/product-video-remake 安装 product-video-remake Skill
+```
+
+也可以在 Windows PowerShell 中手动克隆到 Codex Skills 目录：
+
+```powershell
+git clone https://github.com/ckc1360623/product-video-remake.git "$env:USERPROFILE\.codex\skills\product-video-remake"
+```
+
+安装后，在新的 Codex 对话中通过 `$product-video-remake` 调用，例如：
+
+```text
+使用 $product-video-remake 分析这个参考视频和商品图，生成高保真复刻脚本提示词及请求包。
+```
 
 ## 主要能力
 
